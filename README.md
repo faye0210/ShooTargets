@@ -14,30 +14,30 @@ Rails 5.2.4
 
 ## 機能一覧
 ユーザー機能
-  -[] マイページ機能
-  -[] ログイン機能
-  -[] ログアウト機能
-  -[] SNSログイン機能
+  * マイページ機能
+  * ログイン機能
+  * ログアウト機能
+  * SNSログイン機能
 
 目標（タスク）ページ
-  -[] 作成、保存機能
-  -[] 一覧画面
-  -[] 削除機能
-  -[] 詳細機能
-  -[] 編集機能
-  -[] 検索機能
-  -[] ソート機能
-  -[] 達成登録機能
+  * 作成、保存機能
+  * 一覧画面
+  * 削除機能
+  * 詳細機能
+  * 編集機能
+  * 検索機能
+  * ソート機能
+  * 達成登録機能
 
 目標リストページ
-  -[] 一年の目標リスト（固定）
-  -[] 作成機能
-  -[] 削除機能
+  * 一年の目標リスト（固定）
+  * 作成機能
+  * 削除機能
 
 通知機能
-  -[] メール通知機能
-  -[] 通知機能
-  -[] シェア機能
+  * メール通知機能
+  * 通知機能
+  * シェア機能
 
 
 ## カタログ設計
@@ -53,7 +53,6 @@ https://docs.google.com/spreadsheets/d/16XSfHNbwH9up29PGQdndsTKYQy8bWCJ2Tu1J_TOv
 https://docs.google.com/spreadsheets/d/1CazHy2yvWAfq06G4NwPiJIOY3L-Q0B0jtBclzSTAzkM/edit?usp=sharing
 
 ## 使用予定Gem
-
-・devise
-・carrierWave
-・mini_magik
+* devise
+* carrierWave
+* mini_magik
