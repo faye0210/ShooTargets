@@ -56,3 +56,17 @@ https://docs.google.com/spreadsheets/d/1CazHy2yvWAfq06G4NwPiJIOY3L-Q0B0jtBclzSTA
 * devise
 * carrierWave
 * mini_magik
+* OAuth
+* Bootstrap
+* Ransack
+
+## 使用Gem
+* pry-rails
+* better_errors
+* binding_of_caller
+* devise
+* carrierWave
+* mini_magik
+* OAuth
+* Bootstrap
+* Ransack
