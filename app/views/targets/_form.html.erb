@@ -1,0 +1,30 @@
+<%= form_with(model: @target, local: true) do |f| %>
+  <% if @target.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @target.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @target.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="target_title">
+    <%= f.label :Title %>
+    <%= f.text_field :title, placeholder: "What is your target?" %>
+  </div>
+  <div class="target_detail">
+    <%= f.label :Detail %>
+    <%= f.text_area :detail, placeholder: "Detail of your target" %>
+  </div>
+  <div class="target_deadline">
+    <%= f.label :Deadline %>
+    <%= f.datetime_field :deadline %>
+  </div>
+  <% if current_page?(edit_target_path) %>
+    <%= f.submit "Update"%>
+  <% else %>
+    <%= f.submit "Create"%>
+  <% end %>
+<% end %>
+<%= link_to "Targets List", targets_path %>

@@ -1,0 +1,31 @@
+<h2>Targets List</h2>
+<%= link_to "Create new Target", new_target_path %>
+<table>
+  <% @targets.each do |t| %>
+    <!-- <thead>
+      <tr>
+        <td>label?</td>
+      </tr>
+    </thead> -->
+    <tbody>
+      <tr>
+        <td><strong><%= t.title %></strong></td>
+      </tr>
+      <tr>
+        <td><%= t.deadline %></td>
+      </tr>
+      <tr>
+        <!-- <td>finished!! button</td> -->
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          <%= link_to 'Show', target_path(t) %>
+            <%= link_to 'Edit', edit_target_path(t) %>
+            <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    </tfoot>
+  <% end %>
+</table>

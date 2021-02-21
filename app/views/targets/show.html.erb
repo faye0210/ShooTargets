@@ -1,0 +1,21 @@
+<h2>Deatil of Target</h2>
+<div class="whole_target">
+  <p>
+    <strong>Label:</strong>
+    <%# <%= @target.label %>
+  </p>
+  <p>
+    <strong>Title:</strong>
+    <%= @target.title %>
+  </p>
+  <p>
+    <strong>Detail:</strong>
+    <%= @target.detail %>
+  </p>
+  <p>
+    <strong>Deadline:</strong>
+    <%= @target.deadline %>
+  </p>
+</div>
+
+<%= link_to 'Edit', edit_target_path(@target) %>
