@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GraduationApp</title>
+    <title>ShooTargets</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="header">
+      <img src="/assets/shootargets.png" alt="ShooTargets logo">
+    </header>
+    <div class="content_area">
+      <div class="notification">
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+    <footer class="footer">
+      <p>Copyright © 2020 faye0210 ALL RIGHTS RESERVED.</p>
+    </footer>
   </body>
 </html>

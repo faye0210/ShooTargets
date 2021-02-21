@@ -1,5 +1,5 @@
 # README
-# ShooTarget
+# ShooTargets
 
 ## 概要
 モチベーションを上げやすくしながら目標（またはタスク）を管理できるサービス。
