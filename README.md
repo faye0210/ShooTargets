@@ -70,3 +70,6 @@ https://docs.google.com/spreadsheets/d/1CazHy2yvWAfq06G4NwPiJIOY3L-Q0B0jtBclzSTA
 * OAuth
 * Bootstrap
 * Ransack
+* devise-i18n
+* devise-i18n-views
+* letter_opener_web
