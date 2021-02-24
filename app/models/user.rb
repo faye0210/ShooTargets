@@ -4,11 +4,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
-         :omniauthable, omniauth_providers: %i(google), :authentication_keys => [:login]
+         :omniauthable, omniauth_providers: [:google], authentication_keys: [:login]
 
 
   def self.find_first_by_auth_conditions(warden_conditions)
-    # binding.pry
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
       where(conditions).where(["name = :value OR lower(email) = lower(:value)", { :value => login }]).first

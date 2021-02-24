@@ -1,6 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google
-    binding.pry
     @user = User.find_for_google(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
