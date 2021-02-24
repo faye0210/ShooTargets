@@ -11,15 +11,28 @@
   <body>
     <header class="header">
       <img src="/assets/shootargets.png" alt="ShooTargets logo">
+      <br>
+      <% if user_signed_in? %>
+        <%= link_to "ブログ投稿", blogs_path %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "新規登録", new_user_registration_path %>
+        <%= link_to "ログイン", new_user_session_path %>
+      <% end %>
     </header>
+
     <div class="content_area">
       <div class="notification">
-        <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "#{key}") %>
+        <% if notice %>
+          <p class="alert alert-notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-error"><%= alert %></p>
         <% end %>
       </div>
       <%= yield %>
     </div>
+
     <footer class="footer">
       <p>Copyright © 2020 faye0210 ALL RIGHTS RESERVED.</p>
     </footer>
