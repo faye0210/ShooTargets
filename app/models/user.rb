@@ -3,7 +3,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :authentication_keys => [:login]
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable,
+         :authentication_keys => [:login], :omniauthable, omniauth_providers: %i(google)
+
 
   def self.find_first_by_auth_conditions(warden_conditions)
    conditions = warden_conditions.dup
@@ -12,5 +14,22 @@ class User < ApplicationRecord
    else
      where(conditions).first
    end
+  end
+
+  def self.create_unique_string
+    SecureRandom.uuid
+  end
+
+  def self.find_for_google(auth)
+    user = User.find_by(email: auth.info.email)
+    unless user
+      user = User.new(email: auth.info.email,
+                      provider: auth.provider,
+                      uid:      auth.uid,
+                      password: Devise.friendly_token[0, 20],
+                                   )
+    end
+    user.save
+    user
   end
 end
