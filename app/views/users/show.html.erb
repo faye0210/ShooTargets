@@ -1,14 +1,32 @@
 <h2>My Page</h2>
 
 <div class="profile">
-  <% if @user.avatar? %>
-    <%= image_tag @user.avatar.url %>
-  <% end %>
-  <%= @user.name %>
-  <%= @user.email %>
-  <%= link_to 'プロフィールの編集', edit_user_path(current_user.id)%>
+  <table>
+    <tbody>
+      <tr>
+        <th>
+          <% if @user.avatar? %>
+            <%= image_tag @user.avatar.url %>
+          <% end %>
+        </th>
+        <td>
+          <%= @user.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= @user.email %>
+        </td>
+      </tr>
+    </tbody>
+    <tfooter>
+      <td>
+        <%= link_to 'ユーザー情報の編集', edit_user_path(current_user.id)%>
+      </td>
+    </tfooter>
+  </table>
 </div>
-
+<br>
 <h4>一週間以内に達成しなきゃいけないターゲット</h4>
 <div>
   <table>
