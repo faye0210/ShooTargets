@@ -1,53 +1,55 @@
-<h2>Targets List</h2>
-<%= link_to "Create new Target", new_target_path %>
+<h2 class="head_title">Targets List</h2>
+<%= link_to "Create new Target", new_target_path, class: 'btn btn-primary center-block' %>
 
-<%= search_form_for @q do |f| %>
-  <%= f.label :title, "Keyword" %>
-  <%= f.search_field :title_cont %>
-
-  <%= f.label :status %>
-　<%= f.radio_button :status_eq, '', {:checked => true} %>指定なし
-  <%= f.radio_button :status_eq, false %>未達成
-  <%= f.radio_button :status_eq, true %>完了
-
-  <%= f.submit "Search" %>
-<% end %>
-<br>
-<%= sort_link(@q, :deadline, "Sort as Deadline") %>
-
-<table>
-  <% @targets.each do |t| %>
-    <!-- <theader>
-      <tr>
-        <td>label?</td>
-      </tr>
-    </theader> -->
-    <tbody>
-      <tr>
-        <td><strong><%= t.title %></strong></td>
-      </tr>
-      <tr>
-        <td>
-          <% if t.status == true %>
-            <p>達成してるよ!</p>
-          <% else %>
-            <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td><%= t.deadline.strftime("%Y %m/%d") %></td>
-      </tr>
-    </tbody>
-    <tfooter>
-      <tr>
-        <td>
-          <%= link_to 'Show', target_path(t) %>
-          <%= link_to 'Edit', edit_target_path(t) %>
-          <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    </tfooter>
+<div class="form-inline">
+  <%= search_form_for @q do |f| %>
+    <div class="form-group">
+      <%= f.label :title, "Keyword", class: "" %>
+      <%= f.search_field :title_cont %>
+    </div>
+    <div class="form-group">
+      <%= f.label :status %>
+    　<%= f.radio_button :status_eq, '', {:checked => true} %>指定なし
+      <%= f.radio_button :status_eq, false %>未達成
+      <%= f.radio_button :status_eq, true %>完了
+    </div>
+    <%= f.submit "Search" %>
   <% end %>
   <br>
-</table>
+  <div class="sort_link">
+    <%= sort_link(@q, :deadline, "Sort as Deadline", ontouchstart="") %>
+  </div>
+</div>
+
+<div class="targets_content">
+  <table>
+    <% @targets.each do |t| %>
+      <tbody>
+        <tr>
+          <td><strong><%= t.title %></strong></td>
+        </tr>
+        <tr>
+          <td>
+            <% if t.status == true %>
+              <p>達成してるよ!</p>
+            <% else %>
+              <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t.deadline.strftime("%Y %m/%d") %></td>
+        </tr>
+      </tbody>
+      <tfooter>
+        <tr>
+          <td class="links">
+            <%= link_to 'Show', target_path(t) %>
+            <%= link_to 'Edit', edit_target_path(t) %>
+            <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      </tfooter>
+    <% end %>
+  </table>
+</div>

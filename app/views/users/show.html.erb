@@ -1,8 +1,8 @@
-<h2>My Page</h2>
+<h2 class="head_title">My Page</h2>
 
-<div class="profile">
+<div class="container-fluid">
   <table>
-    <tbody>
+    <tbody class="profile">
       <tr>
         <th>
           <% if @user.avatar? %>
@@ -20,43 +20,41 @@
       </tr>
     </tbody>
     <tfooter>
-      <td>
+      <td class="menu">
         <%= link_to 'ユーザー情報の編集', edit_user_path(current_user.id)%>
       </td>
     </tfooter>
   </table>
 </div>
 <br>
-<h4>一週間以内に達成しなきゃいけないターゲット</h4>
-<div>
+<h4 class="subtitle">一週間以内に達成しなきゃいけないターゲット</h4>
+<div class="container-fluid">
   <table>
-    <% @targets.each do |t| %>
-      <tbody>
-        <tr>
-          <td><strong><%= t.title %></strong></td>
-        </tr>
-        <tr>
-          <td>
-            <% if t.status == true %>
-              <p>達成してるよ!</p>
-            <% else %>
-              <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td><%= t.deadline.strftime("%Y %m/%d") %></td>
-        </tr>
-      </tbody>
-      <tfooter>
-        <tr>
-          <td>
-            <%= link_to 'Show', target_path(t) %>
-            <%= link_to 'Edit', edit_target_path(t) %>
-            <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      </tfooter>
-    <% end %>
+    <div class="targets_block">
+      <% @targets.each do |t| %>
+          <tr>
+            <td><strong><%= t.title %></strong></td>
+          </tr>
+          <tr>
+            <td>
+              <% if t.status == true %>
+                <p>達成してるよ!</p>
+              <% else %>
+                <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td><%= t.deadline.strftime("%Y %m/%d") %></td>
+          </tr>
+          <tr>
+            <td class="menu">
+              <%= link_to 'Show', target_path(t) %>
+              <%= link_to 'Edit', edit_target_path(t) %>
+              <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+      <% end %>
+    </div>
   </table>
 </div>
