@@ -4,7 +4,8 @@ class TargetsController < ApplicationController
   # before_action :ensure_correct_user, only: %i[edit update destroy]
 
   def index
-    @targets = Target.all
+    @q = Target.ransack(params[:q])
+    @targets = @q.result(distinct: true)
   end
 
   def show; end
