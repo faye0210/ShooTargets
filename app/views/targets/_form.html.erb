@@ -21,7 +21,7 @@
     <%= f.label :Deadline %>
     <%= f.datetime_field :deadline %>
   </div>
-  <% if current_page?(edit_target_path) %>
+  <% if current_page?(edit_target_path(f)) %>
     <%= f.submit "Update"%>
   <% else %>
     <%= f.submit "Create"%>

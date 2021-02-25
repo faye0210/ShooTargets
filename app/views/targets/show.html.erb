@@ -16,6 +16,17 @@
     <strong>Deadline:</strong>
     <%= @target.deadline %>
   </p>
+  <p>
+    <strong>Status:</strong>
+    <%# <%= @target.status %>
+  </p>
+</div>
+<div class="achieve">
+  <% if @target.status == true %>
+    <p>達成してるよ!</p>
+  <% else %>
+    <%= button_to "達成！", achieve_target_path(@target), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
+  <% end %>
 </div>
 
 <%= link_to 'Edit', edit_target_path(@target) %>

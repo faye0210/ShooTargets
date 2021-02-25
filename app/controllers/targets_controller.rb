@@ -1,5 +1,5 @@
 class TargetsController < ApplicationController
-  before_action :set_target, only: %i[ show edit update destroy]
+  before_action :set_target, only: %i[ show edit update destroy achieve]
   before_action :authenticate_user!
   # before_action :ensure_correct_user, only: %i[edit update destroy]
 
@@ -40,6 +40,11 @@ class TargetsController < ApplicationController
   def destroy
     @target.destroy
     redirect_to targets_path, notice: ""
+  end
+
+  def achieve
+    @target.update_attributes status: true
+    redirect_to targets_path, notice: "#{@target.title}を達成しました！おめでとう！！"
   end
 
   private
