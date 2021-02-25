@@ -7,6 +7,8 @@ ja:
       target:
         title: タイトル
         detail: 詳細
+        deadline: 達成予定日
+        status: ステータス
       user:
         title: タイトル
         name: 名前
