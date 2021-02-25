@@ -13,6 +13,7 @@
       <img src="/assets/shootargets.png" alt="ShooTargets logo">
       <br>
       <% if user_signed_in? %>
+        <%= link_to "MY PAGE", user_path(current_user.id) %>
         <%= link_to "HOME", targets_path %>
         <%= link_to "LOGOUT", destroy_user_session_path, method: :delete %>
         <p>NAME: <%= current_user.name %></p>

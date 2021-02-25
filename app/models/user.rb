@@ -1,8 +1,9 @@
 class User < ApplicationRecord
   has_many :targets
   attr_accessor :login
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  
+  validates :name,  presence: true, length: { maximum: 30 }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google], authentication_keys: [:login]
@@ -33,4 +34,5 @@ class User < ApplicationRecord
     user.save
     user
   end
+  mount_uploader :avatar, ImageUploader
 end

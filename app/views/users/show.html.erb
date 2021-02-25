@@ -1,0 +1,44 @@
+<h2>My Page</h2>
+
+<div class="profile">
+  <% if @user.avatar? %>
+    <%= image_tag @user.avatar.url %>
+  <% end %>
+  <%= @user.name %>
+  <%= @user.email %>
+  <%= link_to 'プロフィールの編集', edit_user_path(current_user.id)%>
+</div>
+
+<h4>一週間以内に達成しなきゃいけないターゲット</h4>
+<div>
+  <table>
+    <% @targets.each do |t| %>
+      <tbody>
+        <tr>
+          <td><strong><%= t.title %></strong></td>
+        </tr>
+        <tr>
+          <td>
+            <% if t.status == true %>
+              <p>達成してるよ!</p>
+            <% else %>
+              <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= t.deadline.strftime("%Y %m/%d") %></td>
+        </tr>
+      </tbody>
+      <tfooter>
+        <tr>
+          <td>
+            <%= link_to 'Show', target_path(t) %>
+            <%= link_to 'Edit', edit_target_path(t) %>
+            <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      </tfooter>
+    <% end %>
+  </table>
+</div>
