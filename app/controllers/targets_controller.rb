@@ -11,11 +11,11 @@ class TargetsController < ApplicationController
   def show; end
 
   def new
-    @target = Target.new
+    @target = current_user.targets.build
   end
 
   def create
-    @target = Target.new(target_params)
+    @target = current_user.targets.build(target_params)
     if params[:back]
       render :new
     else
