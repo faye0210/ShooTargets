@@ -6,6 +6,7 @@ class TargetsController < ApplicationController
   def index
     @q = Target.ransack(params[:q])
     @targets = @q.result(distinct: true)
+    @targets = @targets.where(user_id: current_user.id)
   end
 
   def show; end

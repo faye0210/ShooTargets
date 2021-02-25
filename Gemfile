@@ -17,6 +17,7 @@ gem 'devise-i18n-views'
 gem 'omniauth', '1.9.1'
 gem 'omniauth-google-oauth2'
 gem 'ransack'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
