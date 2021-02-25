@@ -11,10 +11,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'devise', git: "https://github.com/heartcombo/devise.git",  branch: "ca-omniauth-2"
+gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'omniauth'
+gem 'omniauth', '1.9.1'
 gem 'omniauth-google-oauth2'
 
 group :development, :test do
