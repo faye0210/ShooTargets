@@ -22,34 +22,22 @@
 </div>
 
 <div class="targets_content">
-  <table>
-    <% @targets.each do |t| %>
-      <tbody>
-        <tr>
-          <td><strong><%= t.title %></strong></td>
-        </tr>
-        <tr>
-          <td>
-            <% if t.status == true %>
-              <p>達成してるよ!</p>
-            <% else %>
-              <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td><%= t.deadline.strftime("%Y %m/%d") %></td>
-        </tr>
-      </tbody>
-      <tfooter>
-        <tr>
-          <td class="links">
-            <%= link_to 'Show', target_path(t) %>
-            <%= link_to 'Edit', edit_target_path(t) %>
-            <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      </tfooter>
-    <% end %>
-  </table>
+  <% @targets.each do |t| %>
+    <div class="target_block">
+      <p id="target_title"><strong><%= t.title %></strong></p>
+      <p>
+        <% if t.status == true %>
+          達成してるよ!
+        <% else %>
+          <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger" %>
+        <% end %>
+      </p>
+      <p><strong><%= t.deadline.strftime("%Y %m/%d") %></strong></p>
+      <p>
+        <%= link_to 'Show', target_path(t) %>
+        <%= link_to 'Edit', edit_target_path(t) %>
+        <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    </div>
+  <% end %>
 </div>

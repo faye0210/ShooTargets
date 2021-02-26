@@ -1,32 +1,31 @@
 <h2 class="head_title">Deatil of Target</h2>
-<div class="whole_target">
-  <p>
-    <strong>Label:</strong>
-    <%# <%= @target.label %>
-  </p>
-  <p>
-    <strong>Title:</strong>
-    <%= @target.title %>
-  </p>
-  <p>
-    <strong>Detail:</strong>
-    <%= @target.detail %>
-  </p>
-  <p>
-    <strong>Deadline:</strong>
-    <%= @target.deadline %>
-  </p>
-  <p>
-    <strong>Status:</strong>
-    <%# <%= @target.status %>
-  </p>
+<div class="box">
+  <div class="box-show">
+    <p class="target_title">
+      <strong>Title:</strong>
+      <%= @target.title %>
+    </p>
+    <p class="target_detail">
+      <strong>Detail:</strong>
+      <%= @target.detail %>
+    </p>
+    <p class="target_deadline">
+      <strong>Deadline:</strong>
+      <%= @target.deadline %>
+    </p>
+    <div class="achieve">
+      <p>
+        <strong>Status:</strong>
+        <% if @target.status == true %>
+          達成してるよ!
+        <% else %>
+          <%= button_to "達成！", achieve_target_path(@target), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger"%>
+        <% end %>
+      </p>
+    </div>
+    <br>
+    <%= link_to 'Edit', edit_target_path(@target) %>
+    <br>
+    <%= link_to 'HOME', targets_path %>
+  </div>
 </div>
-<div class="achieve">
-  <% if @target.status == true %>
-    <p>達成してるよ!</p>
-  <% else %>
-    <%= button_to "達成！", achieve_target_path(@target), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }%>
-  <% end %>
-</div>
-
-<%= link_to 'Edit', edit_target_path(@target) %>

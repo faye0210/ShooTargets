@@ -19,16 +19,20 @@
 .form-group {
   margin: 5px 10px;
 }
-.targets_content {
 
-  table {
-    text-align: center;
+.target_block {
+  text-align: center;
+  width: 25%;
+  border: solid 3px #808080;
+  margin: 15px auto;
+  background: #CCFF99;
+
+  #target_title {
+    font-size: 1.5rem;
+    padding: 5px;
   }
-  tbody {
-
-  }
-
 }
+
 .sort_link {
   margin-left: 20px;
   margin-bottom: 5px;
@@ -38,4 +42,16 @@
 }
 .sort_link:active {
   color : #26a69a;
+}
+
+.whole_target {
+  text-align: center;
+}
+
+.box-show {
+  padding: 30px 26px;
+  text-align: center;
+}
+.achieve {
+  margin-bottom: 13px;
 }
