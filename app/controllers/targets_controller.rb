@@ -20,18 +20,19 @@ class TargetsController < ApplicationController
       render :new
     else
       if @target.save
-        redirect_to targets_path, notice: ""
+        redirect_to targets_path, notice: "ターゲットを作成しました！"
       else
         render :new
       end
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
-    if @blog.update(target_params)
-      redirect_to targets_path, notice: ""
+    if @target.update(target_params)
+      redirect_to targets_path, notice: "ターゲットを編集しました！"
     else
       render :edit
     end
@@ -39,11 +40,11 @@ class TargetsController < ApplicationController
 
   def destroy
     @target.destroy
-    redirect_to targets_path, notice: ""
+    redirect_to targets_path, notice: "ターゲットを削除しました！"
   end
 
   def achieve
-    @target.update_attributes status: true
+    @target.update status: true
     redirect_to targets_path, notice: "#{@target.title}を達成しました！おめでとう！！"
   end
 
@@ -55,8 +56,4 @@ class TargetsController < ApplicationController
   def target_params
     params.require(:target).permit(:title, :detail, :deadline)
   end
-
-  # def ensure_correct_user
-  #
-  # end
 end
