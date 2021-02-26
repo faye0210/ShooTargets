@@ -6,7 +6,7 @@ class Target < ApplicationRecord
   validate :date_before_start
 
   def date_before_start
-    if deadline < DateTime.now
+    if deadline.nil? || deadline < DateTime.today
       errors.add(:deadline, "は今日以降のものを選択してください")
     end
   end

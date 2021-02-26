@@ -34,9 +34,13 @@
       </p>
       <p><strong><%= t.deadline.strftime("%Y %m/%d") %></strong></p>
       <p>
-        <%= link_to 'Show', target_path(t) %>
-        <%= link_to 'Edit', edit_target_path(t) %>
-        <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if t.status == true %>
+          <%= link_to 'Show', target_path(t) %>
+        <% else %>
+          <%= link_to 'Show', target_path(t) %>
+          <%= link_to 'Edit', edit_target_path(t) %>
+          <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </p>
     </div>
   <% end %>
