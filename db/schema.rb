@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 2021_02_25_074307) do
   enable_extension "plpgsql"
 
   create_table "targets", force: :cascade do |t|
-    t.string "title"
-    t.text "detail"
-    t.boolean "status", default: false
-    t.datetime "deadline"
+    t.string "title", null: false
+    t.text "detail", null: false
+    t.boolean "status", default: false, null: false
+    t.datetime "deadline", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_074307) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

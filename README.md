@@ -76,3 +76,4 @@ https://docs.google.com/spreadsheets/d/1CazHy2yvWAfq06G4NwPiJIOY3L-Q0B0jtBclzSTA
 * omniauth
 * omniauth-google-oauth2
 * dotenv-rails
+* Rspec関連
