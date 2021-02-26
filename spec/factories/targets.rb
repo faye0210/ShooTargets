@@ -14,9 +14,9 @@ FactoryBot.define do
     status { true }
     association :second_user
   end
-  
-  factory :second_target, class: Target do
-    title { "target2" }
+
+  factory :third_target, class: Target do
+    title { "target3" }
     detail { "test2test2test2estestestest" }
     deadline { DateTime.now }
     status { true }
