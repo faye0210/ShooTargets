@@ -1,7 +1,6 @@
 class TargetsController < ApplicationController
   before_action :set_target, only: %i[ show edit update destroy achieve]
   before_action :authenticate_user!
-  # before_action :ensure_correct_user, only: %i[edit update destroy]
 
   def index
     @q = Target.ransack(params[:q])

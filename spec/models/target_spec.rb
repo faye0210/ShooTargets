@@ -18,6 +18,10 @@ describe 'ターゲットモデル機能', type: :model do
     end
 
     context 'タイトルの文字数チェック' do
+      it "0文字以内はNG" do
+        @target.title = ""
+        expect(@target.valid?).to eq(false)
+      end
       it "1文字以上50文字以内はok" do
         @target.title = "aaaaaaaa"
         expect(@target.valid?).to eq(true)
@@ -30,7 +34,7 @@ describe 'ターゲットモデル機能', type: :model do
 
     context '詳細の文字数チェック' do
       it '0文字はok' do
-        @target.detail = " "
+        @target.detail = ""
         expect(@target.valid?).to eq(true)
       end
       it "1000文字以内はok" do
@@ -44,24 +48,33 @@ describe 'ターゲットモデル機能', type: :model do
     end
   end
 
-  describe 'ターゲット検索機能' do
+  describe '検索機能' do
     before do
-      visit new_session_path
-      fill_in "session_email", with: @user.email
-      fill_in "session_password", with: @user.password
-      click_on "Sign in"
+      @user = FactoryBot.create(:user)
+      @target = FactoryBot.create(:target, user: @user)
+      @second_target = FactoryBot.create(:second_target, user: @user)
     end
-
-    it "曖昧検索すると検索ワードを含むターゲットが絞り込まれる" do
-      expect(assigns(:title_cont)).to match_array([@target])
+    context 'ransackメソッドでタイトルのあいまい検索をした場合' do
+      it "検索キーワードを含むタスクが絞り込まれる" do
+        expect(Target.get_by_title('Factoryで作ったデフォルトのタイトル１')).to include(@target)
+        expect(Target.get_by_title('Factoryで作ったデフォルトのタイトル１')).not_to include(@second_target)
+        expect(Target.get_by_title('Factoryで作ったデフォルトのタイトル１').count).to eq 1
+      end
     end
-
-    it "選んだステータスに完全一致のターゲットが絞り込まれる" do
-
+    context 'scopeメソッドでステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        expect(Target.status_eq('未着手')).to include(@target)
+        expect(Target.status_eq('未着手')).not_to include(@second_target)
+        expect(Target.status_eq('未着手').count).to eq 1
+      end
     end
-
-    it "検索キーワードを含み、なおかつ選んだステータスに完全一致する" do
-
+    context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        expect(Target.title_cont('Factoryで作ったデフォルトのタイトル１')).to include(@target)
+        expect(Target.status_eq('yet')).to include(@target)
+        expect(Target.title_cont('Factoryで作ったデフォルトのタイトル１').count).to eq 1
+        expect(Target.status_eq('yet').count).to eq 1
+      end
     end
   end
 end

@@ -30,27 +30,27 @@ RSpec.describe 'ターゲット管理機能', type: :system do
       end
     end
 
-    # context 'ターゲットが作成順に並んでいる場合' do
-    #   it '終了期日が遅いターゲットが一番上に表示される' do
-    #     visit targets_path
-    #     click_link 'Sort as Deadline'
-    #     visit targets_path(deadline_sort: :true)
-    #     target_list = all('.target_block')
-    #     expect(target_list[0]).to have_content "Factoryで作ったデフォルトのタイトル２"
-    #     expect(target_list[1]).to have_content "Factoryで作ったデフォルトのタイトル１"
-    #   end
-    # end
-    #
-    # context 'ターゲットが優先順位の昇順に並んでいる場合' do
-    #   it '優先順位が高いターゲットが一番上に表示される' do
-    #     visit targets_path
-    #     click_link '優先順位に並べ替える'
-    #     visit targets_path(priority_sort: :true)
-    #     target_list = all('.target_block')
-    #     expect(target_list[0]).to have_content "Factoryで作ったデフォルトのタイトル１"
-    #     expect(target_list[1]).to have_content "Factoryで作ったデフォルトのタイトル２"
-    #   end
-    # end
+    context 'ターゲットが作成順に並んでいる場合' do
+      it '終了期日が近いターゲットが一番上に表示される' do
+        visit root_path
+        click_link 'Sort as Deadline'
+        visit targets_path(deadline_sort: :true)
+        target_list = all('.target_block')
+        expect(target_list[0]).to have_content "target1"
+        expect(target_list[1]).to have_content "target2"
+      end
+    end
+
+    it '終了期日が遠いターゲットが一番上に表示される' do
+      visit root_path
+      click_link 'Sort as Deadline'
+      visit root_path(deadline: :true)
+      click_link 'Sort as Deadline'
+      visit root_path(deadline: :true)
+      target_list = all('.target_block')
+      expect(target_list[0]).to have_content "target2"
+      expect(target_list[1]).to have_content "target1"
+    end
   end
 
   describe 'ターゲット管理機能', type: :system do
@@ -58,34 +58,34 @@ RSpec.describe 'ターゲット管理機能', type: :system do
       FactoryBot.create(:target, user: @user)
       FactoryBot.create(:second_target, user: @user)
     end
-  #   describe '検索機能' do
-  #     context 'タイトルであいまい検索をした場合' do
-  #       it "検索キーワードを含むターゲットで絞り込まれる" do
-  #         visit targets_path
-  #         fill_in 'target_s', with: "Factoryで作ったデフォルトのタイトル１"
-  #         click_button '検索'
-  #         expect(page).to have_content "Factoryで作ったデフォルトのタイトル１"
-  #       end
-  #     end
-  #     context 'ステータス検索をした場合' do
-  #       it "ステータスに完全一致するターゲットが絞り込まれる" do
-  #         visit targets_path
-  #         select '未着手', from: 'target_status'
-  #         click_button '検索'
-  #         expect(page).to have_content "未着手"
-  #       end
-  #     end
-  #     context 'タイトルのあいまい検索とステータス検索をした場合' do
-  #       it "検索キーワードをタイトルに含み、かつステータスに完全一致するターゲット絞り込まれる" do
-  #         visit targets_path
-  #         fill_in 'target_s', with: "Factoryで作ったデフォルトのタイトル１"
-  #         select '未着手', from: 'target_status'
-  #         click_button '検索'
-  #         expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
-  #         expect(page).to have_content '未着手'
-  #       end
-  #     end
-  #   end
+    describe '検索機能' do
+      context 'タイトルであいまい検索をした場合' do
+        it "検索キーワードを含むターゲットで絞り込まれる" do
+          visit root_path
+          fill_in 'title_cont', with: "1"
+          click_button 'Search'
+          expect(page).to have_content "target1"
+        end
+      end
+      context 'ステータス検索をした場合' do
+        it "ステータスに完全一致するターゲットが絞り込まれる" do
+          visit root_path
+          select '未達成', from: 'status_eq'
+          click_button 'Search'
+          expect(page).to have_content "達成！"#達成ボタン
+        end
+      end
+      context 'タイトルのあいまい検索とステータス検索をした場合' do
+        it "検索キーワードをタイトルに含み、かつステータスに完全一致するターゲット絞り込まれる" do
+          visit root_path
+          fill_in 'target_s', with: "target2"
+          select '達成', from: 'status_eq'
+          click_button 'Search'
+          expect(page).to have_content 'target2'
+          expect(page).to have_content '達成してるよ！'
+        end
+      end
+    end
   end
 
   describe '詳細表示機能' do
