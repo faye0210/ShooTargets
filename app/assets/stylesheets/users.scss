@@ -1,0 +1,47 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.box {
+  width: 350px;
+  height: 500px;
+  margin: 60px auto 50px;
+}
+.box-avatar {
+  margin-bottom: 13px;
+}
+.profile_content {
+  text-align: center;
+  margin: 0 auto;
+  padding: 30px;
+
+  .profile_name{
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+  }
+  .profile_info {
+    font-weight: 500;
+    font-size: 1.5rem
+  }
+}
+
+.subtitle {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+
+.target_title {
+  margin-bottom: 13px;
+}
+
+.target_detail {
+  margin-bottom: 13px;
+}
+
+.targets_deadline {
+  margin-bottom: 13px;
+}

@@ -1,5 +1,5 @@
 # README
-# ShooTarget
+# ShooTargets
 
 ## 概要
 モチベーションを上げやすくしながら目標（またはタスク）を管理できるサービス。
@@ -60,5 +60,23 @@ https://docs.google.com/spreadsheets/d/1CazHy2yvWAfq06G4NwPiJIOY3L-Q0B0jtBclzSTA
 * carrierWave
 * mini_magik
 * OAuth
-* Twitter Bootstrap
+* Bootstrap
 * Ransack
+
+## 使用Gem
+* pry-rails
+* better_errors
+* binding_of_caller
+* devise
+* carrierWave
+* mini_magik
+* OAuth
+* Bootstrap
+* Ransack
+* devise-i18n
+* devise-i18n-views
+* letter_opener_web
+* omniauth
+* omniauth-google-oauth2
+* dotenv-rails
+* Rspec関連

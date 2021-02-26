@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GraduationApp</title>
+    <title>ShooTargets</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class="header">
+      <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+      <% if user_signed_in? %>
+        <li><%= current_user.name %></li>
+        <li><%= link_to "MY PAGE", user_path(current_user.id) %></li>
+        <li><%= link_to "HOME", targets_path %></li>
+        <li><%= link_to "LOGOUT", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "SIGN UP", new_user_registration_path %></li>
+        <li><%= link_to "LOGIN", new_user_session_path %></li>
+      <% end %>
+    </ul>
+    </div>
+    </header>
+    <div class="logo container-fluid">
+      <img src="/assets/shootargets.png" alt="ShooTargets logo">
+    </div>
+    <div class="main center">
+      <div class="notification">
+        <% if notice %>
+          <p class="alert alert-info"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
+    <footer class="footer">
+      <p>Copyright © 2020 faye0210 ALL RIGHTS RESERVED.</p>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,57 @@
+// Place all the styles related to the targets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.head_title {
+  text-align: center;
+  font-family: fantasy;
+}
+.btn {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.btn-primary {
+  width: 15%;
+  height: 5%;
+}
+.form-inline {
+  text-align: center;
+}
+.form-group {
+  margin: 5px 10px;
+}
+
+.target_block {
+  text-align: center;
+  width: 25%;
+  border: solid 3px #808080;
+  margin: 15px auto;
+  background: #CCFF99;
+
+  #target_title {
+    font-size: 1.5rem;
+    padding: 5px;
+  }
+}
+
+.sort_link {
+  margin-left: 20px;
+  margin-bottom: 5px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+.sort_link:active {
+  color : #26a69a;
+}
+
+.whole_target {
+  text-align: center;
+}
+
+.box-show {
+  padding: 30px 26px;
+  text-align: center;
+}
+.achieve {
+  margin-bottom: 13px;
+}

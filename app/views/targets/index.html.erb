@@ -1,0 +1,43 @@
+<h2 class="head_title">Targets List</h2>
+<%= link_to "Create new Target", new_target_path, class: 'btn btn-primary center-block' %>
+
+<div class="form-inline">
+  <%= search_form_for @q do |f| %>
+    <div class="form-group">
+      <%= f.label :title, "Keyword", class: "" %>
+      <%= f.search_field :title_cont %>
+    </div>
+    <div class="form-group">
+      <%= f.label :status %>
+    　<%= f.radio_button :status_eq, '', {:checked => true} %>指定なし
+      <%= f.radio_button :status_eq, false %>未達成
+      <%= f.radio_button :status_eq, true %>完了
+    </div>
+    <%= f.submit "Search" %>
+  <% end %>
+  <br>
+  <div class="sort_link">
+    <%= sort_link(@q, :deadline, "Sort as Deadline", ontouchstart="") %>
+  </div>
+</div>
+
+<div class="targets_content">
+  <% @targets.each do |t| %>
+    <div class="target_block">
+      <p id="target_title"><strong><%= t.title %></strong></p>
+      <p>
+        <% if t.status == true %>
+          達成してるよ!
+        <% else %>
+          <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger" %>
+        <% end %>
+      </p>
+      <p><strong><%= t.deadline.strftime("%Y %m/%d") %></strong></p>
+      <p>
+        <%= link_to 'Show', target_path(t) %>
+        <%= link_to 'Edit', edit_target_path(t) %>
+        <%= link_to 'Destroy', target_path(t), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    </div>
+  <% end %>
+</div>

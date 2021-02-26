@@ -1,0 +1,38 @@
+<h2 class="head_title">Update My Page</h2>
+<div class="box">
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_with(model: @user, local: true) do |f| %>
+    <div class="box-name">
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: "your user name" %>
+    </div>
+    <div class="box-avatar">
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar, id: :user_avatar %>
+      <%= f.hidden_field :avatar_cache %>
+    </div>
+    <div class="box-email">
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: "your email" %>
+    </div>
+    <div class="box-password">
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: "password" %>
+    </div>
+    <div class="box-password">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, placeholder: "type same password" %>
+    </div>
+      <%= f.submit "Update", class: "btn btn-default" %>
+  <% end %>
+  <%= link_to 'Back', user_path(@user.id) %>
+</div>
