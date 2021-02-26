@@ -50,6 +50,11 @@ RSpec.describe 'ユーザー機能', type: :system do
         expect(current_path).to eq user_path(id: @user.id)
       end
 
+      it "ターゲットの詳細ページに飛ぶとターゲットの詳細が表示される" do
+        visit edit_target_path
+        expect(page).to have_content ""
+      end
+
       it 'ログアウトするとログイン画面が表示されること' do
         visit user_path(id: @user.id)
         find(".sidebarIconToggle").click

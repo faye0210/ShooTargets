@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show]
 
   resources :targets do
     member do
