@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_074307) do
   create_table "targets", force: :cascade do |t|
     t.string "title", null: false
     t.text "detail", null: false
-    t.boolean "status", default: false, null: false
+    t.boolean "status", default: false
     t.datetime "deadline", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

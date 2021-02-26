@@ -20,6 +20,6 @@ FactoryBot.define do
     detail { "test2test2test2estestestest" }
     deadline { DateTime.now }
     status { true }
-    association :second_user
+    association :user
   end
 end

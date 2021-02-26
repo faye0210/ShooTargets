@@ -1,7 +1,8 @@
 require 'rails_helper'
 describe 'ターゲットモデル機能', type: :model do
   before do
-    @target = FactoryBot.create(:target)
+    @user = FactoryBot.create(:user)
+    @target = FactoryBot.create(:target, user: @user)
   end
 
   describe 'バリデーション' do
@@ -44,36 +45,6 @@ describe 'ターゲットモデル機能', type: :model do
       it "1000文字以上はNG" do
         @target.detail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         expect(@target.valid?).to eq(false)
-      end
-    end
-  end
-
-  describe '検索機能' do
-    before do
-      @user = FactoryBot.create(:user)
-      @target = FactoryBot.create(:target, user: @user)
-      @second_target = FactoryBot.create(:second_target, user: @user)
-    end
-    context 'ransackメソッドでタイトルのあいまい検索をした場合' do
-      it "検索キーワードを含むタスクが絞り込まれる" do
-        expect(Target.get_by_title('Factoryで作ったデフォルトのタイトル１')).to include(@target)
-        expect(Target.get_by_title('Factoryで作ったデフォルトのタイトル１')).not_to include(@second_target)
-        expect(Target.get_by_title('Factoryで作ったデフォルトのタイトル１').count).to eq 1
-      end
-    end
-    context 'scopeメソッドでステータス検索をした場合' do
-      it "ステータスに完全一致するタスクが絞り込まれる" do
-        expect(Target.status_eq('未着手')).to include(@target)
-        expect(Target.status_eq('未着手')).not_to include(@second_target)
-        expect(Target.status_eq('未着手').count).to eq 1
-      end
-    end
-    context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
-      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-        expect(Target.title_cont('Factoryで作ったデフォルトのタイトル１')).to include(@target)
-        expect(Target.status_eq('yet')).to include(@target)
-        expect(Target.title_cont('Factoryで作ったデフォルトのタイトル１').count).to eq 1
-        expect(Target.status_eq('yet').count).to eq 1
       end
     end
   end
