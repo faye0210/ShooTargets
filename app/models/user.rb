@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  has_many :targets
+  has_many :targets, dependent: :destroy
   attr_accessor :login
-  
+
   validates :name,  presence: true, length: { maximum: 30 }
 
   devise :database_authenticatable, :registerable,
@@ -25,7 +25,8 @@ class User < ApplicationRecord
   def self.find_for_google(auth)
     user = User.find_by(email: auth.info.email)
     unless user
-      user = User.new(email: auth.info.email,
+      user = User.new(name: auth.info.name,
+                      email: auth.info.email,
                       provider: auth.provider,
                       uid:      auth.uid,
                       password: Devise.friendly_token[0, 20],

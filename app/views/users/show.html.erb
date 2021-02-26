@@ -1,5 +1,4 @@
 <h2 class="head_title">My Page</h2>
-
 <div class="profile_content">
   <div class="profile_avatar">
     <% if @user.avatar? %>
@@ -14,7 +13,7 @@
     <%= @user.email %>
   </div>
   <br>
-  <%= link_to 'ユーザー情報の編集', edit_user_path(current_user.id)%>
+  <%= link_to 'ユーザー情報の編集', edit_user_path(@user.id)%>
 </div>
 <br>
 <h4 class="subtitle">一週間以内に達成しなきゃいけないターゲット</h4>
