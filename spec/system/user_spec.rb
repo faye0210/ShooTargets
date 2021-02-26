@@ -50,9 +50,10 @@ RSpec.describe 'ユーザー機能', type: :system do
         expect(current_path).to eq user_path(id: @user.id)
       end
 
-      it "ターゲットの詳細ページに飛ぶとターゲットの詳細が表示される" do
-        visit edit_target_path
-        expect(page).to have_content ""
+      it "マイページからユーザー編集画面に飛ぶとマイページ編集ができる" do
+        visit user_path(id: @user.id)
+        click_link "ユーザー情報の編集"
+        expect(page).to have_content "ユーザー編集"
       end
 
       it 'ログアウトするとログイン画面が表示されること' do
