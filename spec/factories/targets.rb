@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :target do
     title { "target1" }
     detail { "testestestestestestest" }
-    deadline { DateTime.now }
+    deadline { DateTime.tomorrow }
     status { false }
     association :user
   end
@@ -10,7 +10,7 @@ FactoryBot.define do
   factory :second_target, class: Target do
     title { "target2" }
     detail { "test2test2test2estestestest" }
-    deadline { DateTime.now }
+    deadline { DateTime.tomorrow }
     status { true }
     association :second_user
   end
