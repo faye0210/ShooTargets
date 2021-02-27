@@ -24,7 +24,7 @@
             </p>
         </div>
         <br>
-        <% if t.status == false %>
+        <% if @target.status == false %>
           <%= link_to 'Edit', edit_target_path(@target) %>
         <% end %>
         <br>
