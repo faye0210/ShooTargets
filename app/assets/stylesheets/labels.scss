@@ -1,0 +1,17 @@
+// Place all the styles related to the labels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.target_label{
+	margin-bottom: 20px;
+	input[type=checkbox] {
+		box-sizing: border-box;
+		display: inline;
+	}
+}
+.labelling{
+	font-size: 1.2rem;
+	margin-top: 10px;
+	margin-left: 20px;
+	text-align: left;
+	height: 1.5rem;
+}

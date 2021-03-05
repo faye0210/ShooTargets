@@ -6,6 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create!(name: "test",
+             email: "test@try.com",
+             password: "aaaaaa",
+             uid: "6",
+             provider: "6"
+            )
+
 5.times do |i|
   name = Faker::Name.name
   email = Faker::Internet.email
@@ -24,7 +31,7 @@ end
   Target.create!(title: title,
                 detail: detail,
                 status: false,
-                deadline: DateTime.now,
+                deadline: DateTime.tomorrow,
                 user_id: User.first.id
                 )
 end
@@ -35,7 +42,7 @@ end
   Target.create!(title: title,
                   detail: detail,
                   status: true,
-                  deadline: DateTime.now,
+                  deadline: DateTime.tomorrow,
                   user_id: User.first.id
                   )
 end
@@ -46,7 +53,11 @@ end
   Target.create!(title: title,
                   detail: detail,
                   status: true,
-                  deadline: DateTime.now,
+                  deadline: DateTime.tomorrow,
                   user_id: User.last.id
                   )
 end
+
+Label.create!(name: "Study")
+Label.create!(name: "Fitness & Health")
+Label.create!(name: "Hobby")

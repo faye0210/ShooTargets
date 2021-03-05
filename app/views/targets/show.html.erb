@@ -1,6 +1,12 @@
 <h2 class="head_title">Deatil of Target</h2>
 <div class="box">
     <div class="box-show">
+        <p>
+            <strong>Label Tag:</strong>
+            <% @target.labels.each do |l| %>
+                <%= l.name %>
+            <% end %>
+        </p>
         <p class="target_title">
             <strong>Title:</strong>
             <%= @target.title %>
@@ -25,7 +31,7 @@
         </div>
         <br>
         <% if @target.status == false %>
-          <%= link_to 'Edit', edit_target_path(@target) %>
+        <%= link_to 'Edit', edit_target_path(@target) %>
         <% end %>
         <br>
         <%= link_to 'HOME', targets_path %>
