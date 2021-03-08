@@ -54,6 +54,6 @@ class TargetsController < ApplicationController
   end
 
   def target_params
-    params.require(:target).permit(:title, :detail, :deadline, { label_ids: [] })
+    params.require(:target).permit(:title, :detail, :deadline, label_ids: [])
   end
 end

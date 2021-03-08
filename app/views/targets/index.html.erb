@@ -9,7 +9,7 @@
     </div>
     <div class="form-group">
         <%= f.label :status %>
-        　<%= f.radio_button :status_eq, '', {:checked => true} %>指定なし
+        <%= f.radio_button :status_eq, '', {:checked => true} %>指定なし
         <%= f.radio_button :status_eq, false %>未達成
         <%= f.radio_button :status_eq, true %>完了
     </div>
@@ -19,17 +19,22 @@
     <div class="sort_link">
         <%= sort_link(@q, :deadline, "Sort as Deadline", ontouchstart="") %>
     </div>
+    <div class="label_sort">
+        <%= form_with url: targets_path, method: :get, local: true do |form| %>
+        <%= form.collection_select :label_id, Label.pluck(:name, :id) %>
+        <% end %>
+    </div>
 </div>
 
 <div class="targets_content">
     <% @targets.each do |t| %>
     <div class="target_block">
         <div class="labelling">
-          <p>
-              <% t.labels.each do |l| %>
-              <%= l.name %>
-              <% end %>
-          </p>
+            <p>
+                <% t.labels.each do |l| %>
+                <%= l.name %>
+                <% end %>
+            </p>
         </div>
         <p id="target_title"><strong><%= t.title %></strong></p>
         <p>
