@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_135626) do
+ActiveRecord::Schema.define(version: 2021_03_08_132429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2021_03_05_135626) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "title"
+    t.date "deadline"
+    t.bigint "user_id"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "target_labels", force: :cascade do |t|
@@ -38,6 +48,8 @@ ActiveRecord::Schema.define(version: 2021_03_05_135626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "list_id"
+    t.index ["list_id"], name: "index_targets_on_list_id"
     t.index ["user_id"], name: "index_targets_on_user_id"
   end
 
@@ -63,7 +75,9 @@ ActiveRecord::Schema.define(version: 2021_03_05_135626) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "lists", "users"
   add_foreign_key "target_labels", "labels"
   add_foreign_key "target_labels", "targets"
+  add_foreign_key "targets", "lists"
   add_foreign_key "targets", "users"
 end

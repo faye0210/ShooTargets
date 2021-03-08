@@ -8,7 +8,8 @@ class TargetsController < ApplicationController
     @targets = @targets.where(user_id: current_user.id)
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @target = current_user.targets.build
