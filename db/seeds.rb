@@ -58,6 +58,9 @@ end
                   )
 end
 
-Label.create!(name: "Study")
-Label.create!(name: "Fitness & Health")
-Label.create!(name: "Hobby")
+Label.create!(name: "Study"
+              )
+Label.create!(name: "Fitness"
+              )
+Label.create!(name: "Hobby"
+              )

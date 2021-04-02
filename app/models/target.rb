@@ -12,4 +12,21 @@ class Target < ApplicationRecord
       errors.add(:deadline, "は今日以降のものを選択してください")
     end
   end
+
+  def save_items(labels)
+    current_labels = self.labels.pluck(:name) unless self.labels.nil?
+    old_labels = current_labels - labels
+    new_labels = labels - current_labels
+
+    # Destroy
+    old_labels.each do |old_name|
+      self.labels.delete Label.find_by(name:old_name)
+    end
+
+    # Create
+    new_labels.each do |new_name|
+      item_label = Label.find_or_create_by(name:new_name)
+      self.labels << item_label
+    end
+  end
 end

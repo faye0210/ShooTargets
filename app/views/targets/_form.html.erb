@@ -1,6 +1,6 @@
 <div class="box">
     <div class="form-group">
-        <%= form_with(model: @target, local: true) do |f| %>
+        <%= form_with(model: [@label, @target], local: true) do |f| %>
         <% if @target.errors.any? %>
         <div id="error_explanation">
             <h2><%= @target.errors.count %>件のエラーがあります。</h2>
@@ -12,15 +12,12 @@
         </div>
         <% end %>
         <div class="target_label">
-            <%= f.collection_check_boxes(:label_ids, Label.all, :id, :name) do |l| %>
-              <%= l.check_box %>
-              <%= l.label { l.text } %>
-              <br>
-            <% end %>
+          <%= f.label :Label %>
+          <%= f.text_field :name, placeholder: "Let's label your Target!(split by space)", class: "form-control" %>
         </div>
         <div class="target_title">
             <%= f.label :Title %>
-            <%= f.text_field :title, placeholder: "What is your target?", class: "form-control" %>
+            <%= f.text_field :title, placeholder: "What is your Target?", class: "form-control" %>
         </div>
         <div class="target_detail">
             <%= f.label :Detail %>
