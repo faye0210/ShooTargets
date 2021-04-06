@@ -3,17 +3,9 @@ class TargetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if params[:search].present?
-      targets = Target.targets_search(params[:search])
-    elsif params[:label_id].present?
-      @labels = Label.find(params[:label_id])
-      targets = @label.targets.order(created_at: :desc)
-    else
-      @q = Target.ransack(params[:q])
-      @targets = @q.result(distinct: true)
-      @targets = @targets.where(user_id: current_user.id)
-    end
-    @label_lists = Label.all
+    @q = Target.ransack(params[:q])
+    @targets = @q.result(distinct: true)
+    @targets = @targets.where(user_id: current_user.id)
   end
 
   def show
@@ -25,12 +17,10 @@ class TargetsController < ApplicationController
 
   def create
     @target = current_user.targets.build(target_params)
-    label_list = params[:target][:name].split(nil)
     if params[:back]
       render :new
     else
       if @target.save
-        @target.save_items(label_list)
         redirect_to targets_path, notice: "ターゲットを作成しました！"
       else
         render :new

@@ -20,21 +20,13 @@
         <div id="sidebarMenu">
             <ul class="sidebarMenuInner">
                 <% if user_signed_in? %>
-                  <li><%= current_user.name %></li>
-                  <li><%= link_to "MY PAGE", user_path(current_user.id) %></li>
-                  <li><%= link_to "HOME", targets_path %></li>
-                  <li class="dropdown">
-                    <p>FIND BY LABEL</p>
-                    <ul class="dropdown-menu" role="menu">
-                      <% @label_lists.each do |list| %>
-                        <li><%= link_to list.name, targets_path(label_id: list.id) %></li>
-                      <% end %>
-                    </ul>
-                  </li>
-                  <li><%= link_to "LOGOUT", destroy_user_session_path, method: :delete %></li>
+                <li><%= current_user.name %></li>
+                <li><%= link_to "MY PAGE", user_path(current_user.id) %></li>
+                <li><%= link_to "HOME", targets_path %></li>
+                <li><%= link_to "LOGOUT", destroy_user_session_path, method: :delete %></li>
                 <% else %>
-                  <li><%= link_to "SIGN UP", new_user_registration_path %></li>
-                  <li><%= link_to "LOGIN", new_user_session_path %></li>
+                <li><%= link_to "SIGN UP", new_user_registration_path %></li>
+                <li><%= link_to "LOGIN", new_user_session_path %></li>
                 <% end %>
             </ul>
         </div>

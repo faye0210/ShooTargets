@@ -19,15 +19,22 @@
     <div class="sort_link">
         <%= sort_link(@q, :deadline, "Sort as Deadline", ontouchstart="") %>
     </div>
+    <div class="label_sort">
+        <%= form_with url: targets_path, method: :get, local: true do |form| %>
+        <%= form.collection_select :label_id, Label.pluck(:name, :id) %>
+        <% end %>
+    </div>
 </div>
 
 <div class="targets_content">
     <% @targets.each do |t| %>
-      <div class="target_block">
-        <div class="label_list_box">
-          <% t.labels.each do |label| %>
-            <%= link_to "#{label.name}", targets_path(label)%>
-          <% end %>
+    <div class="target_block">
+        <div class="labelling">
+            <p>
+                <% t.labels.each do |l| %>
+                <%= l.name %>
+                <% end %>
+            </p>
         </div>
         <p id="target_title"><strong><%= t.title %></strong></p>
         <p>
