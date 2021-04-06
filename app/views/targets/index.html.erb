@@ -16,13 +16,14 @@
     <%= f.submit "Search" %>
     <% end %>
     <br>
+    <div class="label_list">
+      <% @label_list.each do |l| %>
+        <%= link_to l.name, {controller: "targets", action: "index", q:{name_cont: l.name}} %>
+        <%= "(#{l.targets.count})" %>
+      <% end %>
+    </div>
     <div class="sort_link">
         <%= sort_link(@q, :deadline, "Sort as Deadline", ontouchstart="") %>
-    </div>
-    <div class="label_sort">
-        <%= form_with url: targets_path, method: :get, local: true do |form| %>
-        <%= form.collection_select :label_id, Label.pluck(:name, :id) %>
-        <% end %>
     </div>
 </div>
 
@@ -30,11 +31,11 @@
     <% @targets.each do |t| %>
     <div class="target_block">
         <div class="labelling">
-            <p>
-                <% t.labels.each do |l| %>
-                <%= l.name %>
-                <% end %>
-            </p>
+          <p>
+            <% t.labels.each do |l| %>
+              <%= l.name %>
+            <% end %>
+          </p>
         </div>
         <p id="target_title"><strong><%= t.title %></strong></p>
         <p>

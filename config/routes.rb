@@ -13,5 +13,10 @@ Rails.application.routes.draw do
       post "achieve"
     end
   end
+
+  resources :labels do
+    get "targets", to: "targets#search"
+  end
+  
   root to: "targets#index"
 end

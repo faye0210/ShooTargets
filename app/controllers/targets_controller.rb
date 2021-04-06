@@ -6,9 +6,12 @@ class TargetsController < ApplicationController
     @q = Target.ransack(params[:q])
     @targets = @q.result(distinct: true)
     @targets = @targets.where(user_id: current_user.id)
+    @label_list = Label.all
   end
 
   def show
+    @target = Target.find(params[:id])
+    @target_labels = @target.labels
   end
 
   def new
@@ -17,10 +20,12 @@ class TargetsController < ApplicationController
 
   def create
     @target = current_user.targets.build(target_params)
+    label_list = params[:target][:name].split(nil)
     if params[:back]
       render :new
     else
       if @target.save
+        @target.save_label(label_list)
         redirect_to targets_path, notice: "ターゲットを作成しました！"
       else
         render :new
@@ -32,7 +37,9 @@ class TargetsController < ApplicationController
   end
 
   def update
+    label_list = params[:target][:name].split(nil)
     if @target.update(target_params)
+      @target.save_label(label_list)
       redirect_to targets_path, notice: "ターゲットを編集しました！"
     else
       render :edit
