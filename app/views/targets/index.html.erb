@@ -18,7 +18,7 @@
     <br>
     <div class="label_list">
       <% @label_list.each do |l| %>
-        <%= link_to l.name, ({q: { name_eq: l.name }}) %>
+        <%= link_to l.name, targets_path(@q_label, {q:{ name_eq: l.name }}) %>
         <%= "(#{l.targets.count})" %>
       <% end %>
     </div>

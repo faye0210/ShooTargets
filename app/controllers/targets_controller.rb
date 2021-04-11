@@ -68,7 +68,7 @@ class TargetsController < ApplicationController
     params.require(:target).permit(:title, :detail, :deadline, label_ids: [])
   end
 
-  def set_q_for_target
+  def set_q_for_label
     @q_label = Target.ransack(params[:q])
   end
 end
