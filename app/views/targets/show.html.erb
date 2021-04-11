@@ -2,7 +2,6 @@
 <div class="box">
     <div class="box-show">
         <p>
-            <strong>Label Tag:</strong>
             <% @target.labels.each do |l| %>
                 <%= l.name %>
             <% end %>
@@ -17,17 +16,14 @@
         </p>
         <p class="target_deadline">
             <strong>Deadline:</strong>
-            <%= @target.deadline %>
+            <%= @target.deadline.strftime("%Y-%m-%d %H:%M") %>
         </p>
         <div class="achieve">
-            <p>
-                <strong>Status:</strong>
-                <% if @target.status == true %>
-                達成してるよ!
-                <% else %>
-                <%= button_to "達成！", achieve_target_path(@target), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger"%>
-                <% end %>
-            </p>
+            <% if @target.status == true %>
+            <p class="achieve_message">達成してるよ!</p>
+            <% else %>
+            <%= button_to "達成！", achieve_target_path(@target), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger"%>
+            <% end %>
         </div>
         <br>
         <% if @target.status == false %>
