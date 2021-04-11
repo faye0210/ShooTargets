@@ -3,10 +3,13 @@ class TargetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @q = Target.ransack(params[:q])
-    @targets = @q.result(distinct: true)
-    @targets = @targets.where(user_id: current_user.id)
     @label_list = Label.all
+    if @q_label
+      @targets = @q_label.joins(:targets).eager_load(:targets).where(user_id: current_user.id)
+    else
+      @q = Target.ransack(params[:q])
+      @targets = @q.result(distinct: true).where(user_id: current_user.id)
+    end
   end
 
   def show
@@ -63,5 +66,9 @@ class TargetsController < ApplicationController
 
   def target_params
     params.require(:target).permit(:title, :detail, :deadline, label_ids: [])
+  end
+
+  def set_q_for_target
+    @q_label = Target.ransack(params[:q])
   end
 end

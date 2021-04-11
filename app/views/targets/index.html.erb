@@ -18,7 +18,7 @@
     <br>
     <div class="label_list">
       <% @label_list.each do |l| %>
-        <%= link_to l.name, {controller: "targets", action: "index", q:{name_cont: l.name}} %>
+        <%= link_to l.name, ({q: { name_eq: l.name }}) %>
         <%= "(#{l.targets.count})" %>
       <% end %>
     </div>
@@ -38,13 +38,13 @@
           </p>
         </div>
         <p id="target_title"><strong><%= t.title %></strong></p>
-        <p>
-            <% if t.status == true %>
-            達成してるよ!
-            <% else %>
-            <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger" %>
-            <% end %>
-        </p>
+        <div>
+          <% if t.status == true %>
+          <p class="achieve_message">達成してるよ!</p>
+          <% else %>
+          <%= button_to "達成！", achieve_target_path(t.id), method: :POST, data: { confirm: "達成済みにしますか？一度押すと戻せないよ！" }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
         <p><strong><%= t.deadline.strftime("%Y %m/%d") %></strong></p>
         <p>
             <% if t.status == true %>
